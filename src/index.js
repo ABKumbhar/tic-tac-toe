@@ -28,9 +28,8 @@ constructor(props){
  handleClick(i)
  {const squares = this.state.squares.slice();
    if (isWinner(squares) || squares[i]) {
-  return (alert("Game is already over please refresh page"));
+  return ;
 }
-
    squares[i] = this.state.xIsNext?'X':'O';
    this.setState({squares:squares,
    xIsNext: !(this.state.xIsNext),
@@ -48,7 +47,8 @@ constructor(props){
     {status = 'The winner is ' + win + ' player';
 
     }
-  else{  status = 'Next player: ' + (this.state.xIsNext?'X':'O');}
+
+  else {  status = 'Next player: ' + (this.state.xIsNext?'X':'O');}
 
     return (
       <div>
@@ -81,8 +81,7 @@ class Game extends React.Component {
           <Board />
         </div>
         <div className="game-info">
-          <div>{/* status */}</div>
-          <ol>{/* TODO */}</ol>
+
         </div>
       </div>
     );
@@ -102,17 +101,15 @@ function isWinner(squares) {
   ];
   for (let i = 0; i < checkwinner.length; i++) {
     const [a, b, c] = checkwinner[i];
+
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-   squares[a] ='/' + squares[a]+ '/';
-   squares[b] ='/' + squares[b]+ '/';
-   squares[c] ='/' + squares[c]+ '/';
+
       return (squares[a]);
     }
   }
   return null;
 }
 
-// ========================================
 
 export default Game;
 
@@ -123,7 +120,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.register();
